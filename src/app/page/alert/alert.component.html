@@ -1,0 +1,24 @@
+<div class="pageHeader">
+    <mat-icon style="display:inline-block;">notification_important</mat-icon>
+    <h3 style="display:inline-block">Alert</h3>
+
+
+    <mat-divider></mat-divider>
+</div>
+
+<div class="pageBody">
+    <mat-card style="width: 30%">
+        <h3>Mail</h3>
+        <mat-card-content>
+            <mat-icon matListIcon [inline]="true" class="center" style="font-size: 120px;">email</mat-icon>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-stroked-button *ngIf="conActive" [attr.disabled]="conActive === false ? 'disabled' : null" class="confirm" (click)="butConnect()">Connect</button>
+            <button mat-stroked-button *ngIf="disActive" [attr.disabled]="disActive === false ? 'disabled' : null" class="dismiss" (click)="butDisconnect()">Disconnect</button>
+
+
+        </mat-card-actions>
+
+    </mat-card>
+</div>

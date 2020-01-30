@@ -1,0 +1,68 @@
+<!-- navbar -->
+
+<div class="nav">
+
+    <p style="margin: 1%;"><b>Network</b>Monitoring</p>
+    <span>
+        <button mat-icon-button class="sidebar" (click)="drawer.toggle()"><mat-icon style="color: #ffffff;">view_list</mat-icon></button></span>
+    <div class="space"></div>
+
+
+
+    <button mat-button [matMenuTriggerFor]="belowMenu"><b>{{fname}} {{lname}} ({{userType}})</b></button>
+    <mat-menu #belowMenu="matMenu" yPosition="below">
+        <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+
+
+</div>
+
+
+
+<!-- sidebar & content-->
+
+<mat-drawer-container class="example-container " hasBackdrop="True">
+    <mat-drawer #drawer class="example-sidenav" mode="push">
+        <mat-nav-list class="scroller">
+            <h3 matSubheader> <b> Main Navigator :</b></h3>
+            <mat-divider></mat-divider>
+            <a mat-list-item (click)="clickDash()">
+                <mat-icon matListIcon>desktop_windows</mat-icon> Dashboard </a>
+            <!-- <a mat-list-item (click)="clickDatabase()">
+                <mat-icon matListIcon>wb_cloudy</mat-icon> Database </a> -->
+            <mat-divider></mat-divider>
+            <h3 matSubheader><b> Report :</b></h3>
+            <mat-divider></mat-divider>
+            <a mat-list-item (click)="clickReport1()">
+                <mat-icon matListIcon>description</mat-icon> status of device </a>
+            <a mat-list-item (click)="clickReport2()">
+                <mat-icon matListIcon>description</mat-icon> devices downtime and detail </a>
+            <a mat-list-item (click)="clickReport3()">
+                <mat-icon matListIcon>description</mat-icon> detail of devices </a>
+            <a mat-list-item (click)="clickReport4()">
+                <mat-icon matListIcon>description</mat-icon> amount devices </a>
+            <a mat-list-item (click)="clickReport5()">
+                <mat-icon matListIcon>description</mat-icon> down amount </a>
+            <mat-divider></mat-divider>
+            <h3 matSubheader><b>menegment :</b> </h3>
+            <mat-divider></mat-divider>
+            <a mat-list-item (click)="clickAlert()">
+                <mat-icon matListIcon>notification_important</mat-icon> Alert </a>
+            <a mat-list-item (click)="clickUserAndDevice()">
+                <mat-icon matListIcon>settings_applications</mat-icon> User&Device </a>
+            <a mat-list-item (click)='clickSetting()'>
+                <mat-icon matListIcon>build</mat-icon> Setting </a>
+
+        </mat-nav-list>
+    </mat-drawer>
+    <!-- content -->
+    <mat-drawer-content style="background-color: #dfe4ea;">
+        <router-outlet class="scroller"></router-outlet>
+        <!-- foot -->
+
+        <div class="foot">
+            <p>Network Monitoring System</p>
+        </div>
+    </mat-drawer-content>
+
+</mat-drawer-container>

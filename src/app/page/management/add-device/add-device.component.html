@@ -1,0 +1,175 @@
+<button mat-raised-button (click)="open(content)"><mat-icon>control_point</mat-icon><span>  Add Device</span></button>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Device</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+    </div>
+    <div class="modal-body">
+
+        <mat-tab-group>
+            <mat-tab label="Manual">
+                <form [formGroup]="addDeviceForm">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label>ip <span style="color: red;">*</span>
+                       </label>
+                            <input type="text" class="form-control" formControlName="ip" required>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>community string <span style="color: red;">*</span>
+                    </label>
+                            <input type="text" class="form-control" formControlName="commu" required>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>active <span style="color: red;">*</span>
+                   </label>
+                            <mat-slide-toggle style="float: right;" color="primary" formControlName="active" required>{{addDeviceForm.value['active']}}</mat-slide-toggle>
+
+
+                        </div>
+
+                        <button mat-stroked-button style="visibility: hidden;">Auto fill</button>
+                        <div class="form-group">
+                            <label>hostname
+                        </label>
+                            <input type="text" class="form-control" formControlName="hostname">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>build
+                    </label>
+                            <input type="text" class="form-control" formControlName="build">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>location
+                 </label>
+                            <input type="text" class="form-control" formControlName="location">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>node
+                     </label>
+                            <input type="text" class="form-control" formControlName="node">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>rack
+                     </label>
+                            <input type="text" class="form-control" formControlName="rack">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>brand
+                    </label>
+                            <input type="text" class="form-control" formControlName="brand">
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Contact number               
+                        </label>
+                            <input type="text" class="form-control" formControlName="contractNum"></div>
+
+
+
+                        <div class="form-group">
+                            <label>type
+                     </label>
+                            <input type="text" class="form-control" formControlName="type">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>serialNumber
+                        </label>
+                            <input type="text" class="form-control" formControlName="serialNumber">
+                        </div>
+
+
+                    </div>
+                    <button type="button" mat-flat-button class="dismiss pull-left" (click)="modal.dismiss('Cross click')">Close</button>
+                    <button type="submit" class="confirm" mat-flat-button (click)="onRegSubmit();openSnackBar();modal.close()">Submit</button>
+                </form>
+            </mat-tab>
+            <mat-tab label="CSV Import">
+                <div style="margin-top: 1%;">
+                    <button mat-raised-button (click)="downloadCSV()" style="margin-bottom: 1%;"><mat-icon>description</mat-icon><span><b>Download CSV Tamplate</b></span></button>
+                    <p><b style="color: red;">* </b> <b>ip,community string and active must valid</b></p>
+                    Input your CSV :<input type="file" (change)="onChange($event.target.files);">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th *ngFor="let i of jsonHead">{{i}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i of jsonContent">
+                                <td *ngFor="let ii of jsonHead">{{i[ii]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <ng-container *ngIf="sucessList.length != 0">
+                        <h3>Success :</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let i of jsonHead">{{i}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let i of sucessList">
+                                    <td *ngFor="let ii of jsonHead">{{i[ii]}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ng-container>
+                    <br>
+                    <ng-container *ngIf="failList.length != 0">
+                        <h3>Fail :</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let i of jsonHead">{{i}}</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let i of failList">
+                                    <td *ngFor="let ii of jsonHead">{{i[ii]}}</td>
+                                    <td>{{i['description']}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ng-container>
+
+
+
+
+                    <!-- <button class="confirm" mat-flat-button (click)="setContent();">View CSV</button> -->
+                    <button type="button" mat-flat-button class="dismiss pull-left" (click)="modal.dismiss('Cross click')">Close</button>
+                    <button type="submit" class="confirm" mat-flat-button (click)="openSnackBar();uploadCSV()">Submit</button>
+
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+
+</ng-template>

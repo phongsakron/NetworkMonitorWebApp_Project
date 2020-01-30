@@ -1,0 +1,32 @@
+<div class="pageHeader">
+    <mat-icon style="display:inline-block;">
+
+        wb_cloudy</mat-icon>
+    <h3 style="display:inline-block">Database</h3>
+    <mat-divider></mat-divider>
+</div>
+
+
+<div class="pageBody">
+
+    <mat-card style="width: 50%;">
+        <mat-label><b>Date : </b></mat-label>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="dateFrom" name="dateFrom">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <app-notify-log></app-notify-log>
+    </mat-card>
+
+
+
+
+
+    <app-all-device></app-all-device>
+
+    <app-donut-chart-all-device></app-donut-chart-all-device>
+
+
+</div>

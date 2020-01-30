@@ -1,0 +1,141 @@
+<div class="pageHeader">
+
+    <mat-icon style="display:inline-block;">
+
+        description</mat-icon>
+    <h3 style="display:inline-block">Report summary devices downtime and detail</h3>
+
+    <mat-divider></mat-divider>
+</div>
+<div class="pageBody">
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Option
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form #optionForm="ngForm">
+
+                <div style="margin-left: 1%">
+                    <div class="row">
+                        <mat-label><b>Node : </b></mat-label>
+                        <mat-form-field>
+                            <mat-select [(ngModel)]="node" name="node" required>
+                                <mat-option *ngFor="let re of nodes" [value]="re">
+                                    {{re}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-label><b>Build : </b></mat-label>
+                        <mat-form-field>
+                            <mat-select [(ngModel)]="build" name="build" required>
+                                <mat-option *ngFor="let re of builds" [value]="re">
+                                    {{re}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-label><b>location : </b></mat-label>
+                        <mat-form-field>
+                            <mat-select [(ngModel)]="location" name="location" required>
+                                <mat-option *ngFor="let re of locations" [value]="re">
+                                    {{re}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-label><b>Rack : </b></mat-label>
+                        <mat-form-field>
+                            <mat-select [(ngModel)]="rack" name="rack" required>
+                                <mat-option *ngFor="let re of racks" [value]="re">
+                                    {{re}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-label><b>From : </b></mat-label>
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker" [(ngModel)]="dateFrom" name="dateFrom" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-label style="margin-left: 2%"><b>too :</b></mat-label>
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker2" [(ngModel)]="dateToo" name="dateToo" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <span style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+             <button mat-stroked-button class="confirm" type="submit"  (click)="sendFilter()"><mat-icon matListIcon>search</mat-icon>Search</button>
+        
+        </span>
+
+
+            </form>
+            <!-- {{rack}}{{node}}{{build}} -->
+        </mat-card-content>
+    </mat-card>
+
+
+    <!-- --------------------------------------------------------report-------------------------------------------------------- -->
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Report
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <span style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+                                    <button  mat-stroked-button class="confirm" (click)="downloadPDF()"><mat-icon>archive</mat-icon>Export PDF</button>
+                
+                            </span>
+
+
+            <div style="border: 1px solid black;background-color: white">
+                <h1> Report summary devices downtime and detail</h1>
+                <p>Report form : node {{node}} location {{location}} build {{build}} rack {{rack}}</p>
+                <p>From {{dateFromView}} Too {{dateTooView}}</p>
+                <p>Amount of device {{amount}}</p>
+                <table class="row-border hover" id="table1">
+                    <thead>
+                        <tr>
+                            <th>Device</th>
+                            <th>Down amount</th>
+                            <th>Downtime</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Summary downtime</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="reportList['data'].length == 0; else elseTemplate">
+                            <tr>
+                                <td colspan="11" style="text-align: center;">No Record Found</td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #elseTemplate>
+
+                        </ng-template>
+
+
+                        <tr *ngFor="let list of finaldata">
+                            <td *ngIf="tableFrom(list);else elseTemplate2">{{list['ip']}}</td>
+                            <td *ngIf="tableFrom(list);else elseTemplate2">{{list['length']}}</td>
+                            <td>{{list['duration']}}</td>
+                            <td>{{list['start']}}</td>
+                            <td>{{list['end']}}</td>
+                            <td *ngIf="tableFrom(list);else elseTemplate2">{{list['sumDuration']}}</td>
+                            <ng-template #elseTemplate2>
+                                <td></td>
+                            </ng-template>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </mat-card-content>

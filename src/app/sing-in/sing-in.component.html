@@ -1,0 +1,95 @@
+<mat-card class="center">
+    <div style="text-align: center;font-size: larger;">
+        <span style=" display: inline-block;"><b>Network</b></span>
+        <span style=" display: inline-block;"><p>MonitoringSystem</p></span>
+    </div>
+
+    <p style="text-align: center;">Sign in to start your session</p>
+
+    <form #optionForm="ngForm">
+        <span style="display: block;">
+                <mat-form-field style="display: block;margin-left: auto;margin-right: auto;width: 80%;">
+                    <input matInput [(ngModel)]="mUser" placeholder="Username" [formControl]="userFormControl">
+                    <mat-error *ngIf="userFormControl.hasError('required')">
+                        Username is <strong>required</strong>
+                    </mat-error>
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                </mat-form-field>
+            </span>
+        <span style="display: block"> <mat-form-field style="display: block;margin-left: auto;margin-right: auto;width: 80%;">
+                    <input matInput type="password" [(ngModel)]="mPass" placeholder="Password" [formControl]="passFormControl">
+                    <mat-error *ngIf="passFormControl.hasError('required')">
+                        Password is <strong>required</strong>
+                    </mat-error>
+                    <mat-icon matSuffix >lock</mat-icon>
+        </mat-form-field>
+        </span>
+
+
+
+    </form>
+    <span style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+            <button mat-button class="confirm" (click)="onSingin()" style="float: right;margin-right: 10%;"><b>Sign In</b> </button>
+    
+    </span>
+    <span style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+            
+    <a class="link" style="padding-right: 10%;" (click)="open(content)">Register a new membership</a>
+    </span>
+
+
+
+</mat-card>
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Register</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+    <form [formGroup]="registerForm">
+        <div class="modal-body">
+            <div class="form-group">
+                <label>
+                                                      Username:
+                                                      
+                                                    </label>
+                <input type="text" class="form-control" formControlName="regUsername" required>
+            </div>
+
+            <div class="form-group">
+                <label>
+                                                            Password: </label>
+                <input type="password" class="form-control" formControlName="regPassword" required>
+
+            </div>
+            <div class="form-group">
+                <label>
+                                                            First Name:</label>
+                <input type="text" class="form-control" formControlName="regFirstName">
+
+            </div>
+            <div class="form-group">
+                <label>
+                                                            Last Name:</label>
+                <input type="text" class="form-control" formControlName="regLastName">
+
+            </div>
+            <div class="form-group">
+                <label>
+                                                            Email:</label>
+                <input type="text" class="form-control" formControlName="regEmail" required>
+
+
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" mat-flat-button class="dismiss pull-left" (click)="modal.dismiss('Cross click')">Close</button>
+            <button type="submit" class="confirm" mat-flat-button class="confirm" [disabled]="!registerForm.valid" (click)="onRegSubmit();openSnackBar();modal.dismiss();">Submit</button>
+        </div>
+    </form>
+</ng-template>

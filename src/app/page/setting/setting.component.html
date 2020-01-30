@@ -1,0 +1,59 @@
+<div class="pageHeader">
+
+    <mat-icon style="display:inline-block;">
+
+        dashboard</mat-icon>
+    <h3 style="display:inline-block">Setting</h3>
+
+    <mat-divider></mat-divider>
+</div>
+
+<div class="pageBody">
+
+    <mat-card *ngIf="userType == 'admin'">
+        <mat-card-header>
+            <mat-card-title>
+                App Setting
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <b>Alert</b>
+
+            <mat-slide-toggle color="primary" [checked]="state2" [disabled]="disabled" [(ngModel)]="state2" (click)="slideToggleAlert()">{{state2}}</mat-slide-toggle>
+            <br>
+            <b>Monitor</b>
+
+            <mat-slide-toggle color="primary" [checked]="state" [disabled]="disabled" [(ngModel)]="state" (click)="slideToggle()">{{state}}</mat-slide-toggle>
+
+
+
+        </mat-card-content>
+    </mat-card>
+
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Reset Password
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            Enter new password : <input type="password"> Confirm new password :<input type="password">
+            <button>Submit</button>
+        </mat-card-content>
+    </mat-card>
+
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                MailServer
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            Current Alert Sender : loram@goodle.com Mail Server : <input type="text"> port :<input type="text">
+            <button>Submit</button> Sender Mail : <input type="text"> Sender Password : <input type="password">
+            <button>Submit</button>
+        </mat-card-content>
+    </mat-card>
+</div>

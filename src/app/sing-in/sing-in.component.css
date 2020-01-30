@@ -1,0 +1,15 @@
+.center {
+    margin: auto;
+    margin-top: 5%;
+    width: 30%;
+    min-width: fit-content;
+    padding: 10px;
+}
+
+a.link {
+    color: #70a1ff;
+}
+
+a.link:hover {
+    color: #5352ed;
+}

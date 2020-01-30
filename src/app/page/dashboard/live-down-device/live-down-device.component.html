@@ -1,0 +1,37 @@
+<mat-card class="active">
+    <mat-card-header>
+        <mat-card-title style="text-transform: capitalize;">All Device</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <table datatable [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Address</th>
+                <th>Build</th>
+                <th>Node</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of myList">
+                <td>{{item.timedate}}</td>
+                <td>{{item.ip}}</td>
+                <td>{{item.build}}</td>
+                <td>{{item.node}}</td>
+                <td>{{item.location}}</td>
+                <td *ngIf="item.icmpstatus == '1'">
+                    <mat-icon matListIcon class="statusup">fiber_manual_record</mat-icon>Up</td>
+                <td *ngIf="item.icmpstatus == '0'">
+                    <mat-icon matListIcon class="statusdown">fiber_manual_record</mat-icon>
+                    Down</td>
+                <td>
+                    <a [routerLink]="['/main/devicedetail', item.ip]">
+                        <mat-icon matListIcon>search</mat-icon> View</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</mat-card>

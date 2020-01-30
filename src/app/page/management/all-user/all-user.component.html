@@ -1,0 +1,114 @@
+<mat-card>
+    <h3>
+        <mat-icon>account_box</mat-icon>
+        All Users
+    </h3>
+    <mat-card-content>
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Fullname</th>
+                    <th>Type</th>
+                    <th>Setting</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let list of myUser">
+
+                    <td>{{list.username}}</td>
+                    <td>{{list.firstname}} {{list.lastname}}</td>
+                    <ng-container *ngIf="list.usertype == 0; else elseTemplate">
+                        <td>User</td>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <td>Admin</td>
+                    </ng-template>
+                    <td>
+                        <p class="link" (click)="setForm(list);open(content)">
+                            <mat-icon matListIcon>edit</mat-icon>edit</p>
+
+                        <p class="danger" (click)="setDelete(list);open(confirm)">
+                            <mat-icon matListIcon>delete</mat-icon>delete</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>
+
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit user</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+    </div>
+    <form [formGroup]="editForm">
+        <div class="modal-body">
+            <div class="form-group">
+                <label>
+                                                                      Username:
+                                                                      
+                                                                    </label>
+                <input type="text" class="form-control" formControlName="regUsername" required disabled>
+            </div>
+
+            <div class="form-group">
+                <label>
+                                                                            Password: </label>
+                <input type="password" class="form-control" formControlName="regPassword" required>
+
+            </div>
+            <div class="form-group">
+                <label>
+                                                                            First Name:</label>
+                <input type="text" class="form-control" formControlName="regFirstName">
+
+            </div>
+            <div class="form-group">
+                <label>
+                                                                            Last Name:</label>
+                <input type="text" class="form-control" formControlName="regLastName">
+
+            </div>
+            <div class="form-group">
+                <label>
+                                                                            Email:</label>
+                <input type="text" class="form-control" formControlName="regEmail" required>
+
+
+            </div>
+            <div class="form-group">
+                <label>
+                            User Type:</label>
+                <mat-radio-group formControlName="regType" required>
+                    <mat-radio-button value="admin">Admin</mat-radio-button>
+                    <mat-radio-button value="user">User</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" mat-flat-button class="dismiss pull-left" (click)="modal.dismiss('Cross click')">Close</button>
+            <button type="submit" mat-flat-button class="confirm" [disabled]="!editForm.valid" (click)="editUser();modal.dismiss('Cross click')">Submit</button>
+        </div>
+    </form>
+</ng-template>
+
+
+<ng-template #confirm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Confirm delete for Username : {{deleteUsername}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+    </div>
+    <div class="modal-footer">
+        <button type="button" mat-flat-button class="dismiss pull-left" (click)="modal.dismiss('Cross click')">Close</button>
+        <button type="submit" mat-flat-button class="confirm" (click)="deleteUser();modal.dismiss('Cross click')">confirm</button>
+    </div>
+</ng-template>

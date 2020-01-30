@@ -1,0 +1,248 @@
+<div class="pageHeader">
+    <a [routerLink]="['/main/dashboard']">
+        <mat-icon style="display:inline-block;">arrow_back</mat-icon>
+        <h3 style="display:inline-block">Dashboard</h3>
+    </a>
+    <h3 style="display:inline-block;margin-left: 1%;">Device detail : {{myData.ip}}</h3>
+    <button mat-raised-button style="margin-left: 1%;" (click)="setForm(myData);open(content)">Edit</button>
+    <mat-divider></mat-divider>
+</div>
+
+
+<div class="pageBody">
+
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <b>Live Detail</b>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table class="table">
+                <thead>
+                    <th scope="col">ip</th>
+                    <th scope="col">community string</th>
+                    <th scope="col">location</th>
+                    <th scope="col">build</th>
+                    <th scope="col">node</th>
+                    <th scope="col">rack</th>
+                    <th scope="col">serial number</th>
+                    <th scope="col">contract number</th>
+                    <th scope="col">monitor active</th>
+                    <th scope="col">devicetype</th>
+                    <th scope="col">brand</th>
+                    <th scope="col">status</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">{{myData.ip}}</td>
+                        <td>{{myData.community}}</td>
+                        <td>{{myData.location}}</td>
+
+                        <td>{{myData.build}}</td>
+                        <td>{{myData.node}}</td>
+                        <td>{{myData.rack}}</td>
+                        <td>{{myData.serialNumber}}</td>
+                        <td>{{myData.contractNumber}}</td>
+                        <td>{{myData.active}}</td>
+                        <td>{{myData.devicetype}}</td>
+                        <td>{{myData.brand}}
+                            <td>{{myData.status}}
+                                <ng-container *ngIf="myData.status == 'Up'; else elseTemplate">
+                                    <i class="fa fa-circle text-green"></i>
+                                </ng-container>
+                                <ng-template #elseTemplate>
+                                    <i class="fa fa-circle text-red"></i>
+                                </ng-template>
+                            </td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+        </mat-card-content>
+    </mat-card>
+
+    <!-- end Live detail -->
+    <!-- start Uptime/Downtime -->
+
+    <mat-card style="width: max-content;">
+        <mat-card-header>
+            <mat-card-title>
+                Uptime/Downtime
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            {{myData.upTime}}
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Port status
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <span *ngFor="let item of portList" style="display: inline-block;margin-left: 1%;">
+                           
+                    <ng-container *ngIf="item.portstatus == '1'; else elseTemplate">
+                        <div class="card" style="text-align: center;width:max-content ;">
+                            <div class="card-body" >
+                                <h5 class="card-title" > <mat-icon matListIcon class="statusup">inbox</mat-icon></h5>
+                                <p class="card-text" >{{item.porttype}}</p>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                            <div class="card" style="text-align: center;width:max-content">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> <mat-icon matListIcon class="statusdown">inbox</mat-icon></h5>
+                                        <p class="card-text">{{item.porttype}}</p>
+                                    </div>
+                                </div>
+                    </ng-template>
+                    
+                </span>
+
+        </mat-card-content>
+    </mat-card>
+
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Live Down Devie</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <table datatable [dtTrigger]="dtTrigger" class="row-border hover">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of myList">
+                    <td>{{item.timedate}}</td>
+                    <td *ngIf="item.icmpstatus == '1'">
+                        <mat-icon matListIcon class="statusup">fiber_manual_record</mat-icon>Up</td>
+                    <td *ngIf="item.icmpstatus == '0'">
+                        <mat-icon matListIcon class="statusdown">fiber_manual_record</mat-icon>
+                        Down</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </mat-card>
+
+</div>
+
+
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Device</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+    </div>
+    <form [formGroup]="editDeviceForm">
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label>ip <span style="color: red;">*</span>
+               </label>
+                <input type="text" class="form-control" formControlName="ip" required>
+            </div>
+
+
+            <div class="form-group">
+                <label>community string <span style="color: red;">*</span>
+            </label>
+                <input type="text" class="form-control" formControlName="commu" required>
+            </div>
+
+
+            <div class="form-group">
+                <label>active <span style="color: red;">*</span>
+           </label>
+                <mat-slide-toggle style="float: right;" color="primary" formControlName="active" required>{{editDeviceForm.value['active']}}</mat-slide-toggle>
+
+
+            </div>
+
+            <button mat-stroked-button style="visibility: hidden;">Auto fill</button>
+            <div class="form-group">
+                <label>hostname
+                </label>
+                <input type="text" class="form-control" formControlName="hostname">
+            </div>
+
+
+            <div class="form-group">
+                <label>build
+            </label>
+                <input type="text" class="form-control" formControlName="build">
+            </div>
+
+
+            <div class="form-group">
+                <label>location
+         </label>
+                <input type="text" class="form-control" formControlName="location">
+            </div>
+
+
+            <div class="form-group">
+                <label>node
+             </label>
+                <input type="text" class="form-control" formControlName="node">
+            </div>
+
+
+            <div class="form-group">
+                <label>rack
+             </label>
+                <input type="text" class="form-control" formControlName="rack">
+            </div>
+
+
+            <div class="form-group">
+                <label>brand
+            </label>
+                <input type="text" class="form-control" formControlName="brand">
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Contact number               
+                </label>
+                <input type="text" class="form-control" formControlName="contractNum"></div>
+
+
+
+            <div class="form-group">
+                <label>type
+             </label>
+                <input type="text" class="form-control" formControlName="type">
+            </div>
+
+
+            <div class="form-group">
+                <label>serialNumber
+                </label>
+                <input type="text" class="form-control" formControlName="serialNumber">
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" mat-flat-button class="dismiss pull-left" (click)="modal.dismiss('Cross click')">Close</button>
+            <button type="submit" class="confirm" mat-flat-button (click)="conEdit();modal.dismiss();">Submit</button>
+        </div>
+    </form>
+</ng-template>

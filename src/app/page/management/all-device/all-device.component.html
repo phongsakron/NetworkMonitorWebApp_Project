@@ -1,0 +1,186 @@
+<mat-card>
+    <h3>
+        <mat-icon>dns</mat-icon>
+        All Device
+    </h3>
+    <mat-card-content>
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+            <thead>
+                <tr>
+                    <th>IP Address</th>
+                    <th>Node</th>
+                    <th>Build</th>
+                    <th>Location</th>
+                    <th>Rack</th>
+                    <th>Contract Number</th>
+                    <th>Monitoring</th>
+                    <th>Setting</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let list of myList">
+                    <td>{{list.ip}}</td>
+                    <td>{{list.node}}</td>
+                    <td>{{list.build}}</td>
+                    <td>{{list.location}}</td>
+                    <td>{{list.rack}}</td>
+                    <!-- <td>{{list.contractnumber}}</td> -->
+                    <td>
+                        <ng-container *ngIf="!list.contractnumber; else noCon">
+                            null
+                        </ng-container>
+                        <ng-template #noCon>
+                            {{list.contractnumber}}
+                        </ng-template>
+                    </td>
+                    <ng-container *ngIf="list.active == 1; else elseTemplate">
+                        <td>
+                            <mat-icon matListIcon class="statusup">fiber_manual_record</mat-icon>Yes
+                        </td>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <td>
+                            <mat-icon matListIcon class="statusdown">fiber_manual_record</mat-icon>No
+                        </td>
+                    </ng-template>
+
+                    <td>
+                        <p class="link" (click)="setForm(list);open(content)">
+                            <mat-icon matListIcon>edit</mat-icon>edit</p>
+
+                        <p class="danger" (click)="setDelete(list);open(confirm)">
+                            <mat-icon matListIcon>delete</mat-icon>delete</p>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>
+
+
+
+
+
+
+
+
+
+<ng-template #confirm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">confirm delete for IP : {{ipDelete}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+    </div>
+    <div class="modal-footer">
+        <button type="button" mat-flat-button class="dismiss pull-left" (click)="modal.dismiss('Cross click')">Close</button>
+        <button type="submit" mat-flat-button class="confirm" (click)="conDelte();modal.dismiss();">confirm</button>
+    </div>
+</ng-template>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Device</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+    </div>
+    <form [formGroup]="editDeviceForm">
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label>ip <span style="color: red;">*</span>
+               </label>
+                <input type="text" class="form-control" formControlName="ip" required>
+            </div>
+
+
+            <div class="form-group">
+                <label>community string <span style="color: red;">*</span>
+            </label>
+                <input type="text" class="form-control" formControlName="commu" required>
+            </div>
+
+
+            <div class="form-group">
+                <label>active <span style="color: red;">*</span>
+           </label>
+                <mat-slide-toggle style="float: right;" color="primary" formControlName="active" required>{{editDeviceForm.value['active']}}</mat-slide-toggle>
+
+
+            </div>
+
+            <button mat-stroked-button style="visibility: hidden;">Auto fill</button>
+            <div class="form-group">
+                <label>hostname
+                </label>
+                <input type="text" class="form-control" formControlName="hostname">
+            </div>
+
+
+            <div class="form-group">
+                <label>build
+            </label>
+                <input type="text" class="form-control" formControlName="build">
+            </div>
+
+
+            <div class="form-group">
+                <label>location
+         </label>
+                <input type="text" class="form-control" formControlName="location">
+            </div>
+
+
+            <div class="form-group">
+                <label>node
+             </label>
+                <input type="text" class="form-control" formControlName="node">
+            </div>
+
+
+            <div class="form-group">
+                <label>rack
+             </label>
+                <input type="text" class="form-control" formControlName="rack">
+            </div>
+
+
+            <div class="form-group">
+                <label>brand
+            </label>
+                <input type="text" class="form-control" formControlName="brand">
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Contact number               
+                </label>
+                <input type="text" class="form-control" formControlName="contractNum"></div>
+
+
+
+            <div class="form-group">
+                <label>type
+             </label>
+                <input type="text" class="form-control" formControlName="type">
+            </div>
+
+
+            <div class="form-group">
+                <label>serialNumber
+                </label>
+                <input type="text" class="form-control" formControlName="serialNumber">
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" mat-flat-button class="dismiss pull-left" (click)="modal.dismiss('Cross click')">Close</button>
+            <button type="submit" class="confirm" mat-flat-button (click)="conEdit();modal.dismiss();">Submit</button>
+        </div>
+    </form>
+</ng-template>

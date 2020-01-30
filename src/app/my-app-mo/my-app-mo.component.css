@@ -1,0 +1,99 @@
+.space {
+    flex: 1 1 auto;
+}
+
+.nav {
+    top: 0;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: var(--confirm);
+    background-image: linear-gradient(to bottom right, var(--confirm), var(--lowconfirm));
+    color: #ffffff;
+    font-weight: 600;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.foot {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 20px;
+    width: 100%;
+    background-color: #dfe4ea;
+    border-top-color: #ced6e0;
+    border-top-width: 2px;
+    border-top-style: solid;
+    align-items: center;
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.foot p {
+    color: #747d8c;
+    text-align: right;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-right: 1%;
+}
+
+.example-container {
+    width: 100%;
+    top: 60px;
+    bottom: 0;
+    position: absolute;
+}
+
+.example-sidenav {
+    width: fit-content;
+    min-width: 200px;
+}
+
+a {
+    text-transform: capitalize;
+}
+
+a.mylist {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: #ffffff;
+    color: #57606f;
+}
+
+.mylist a {
+    flex: 1;
+}
+
+a.mylist:hover {
+    background-color: #47cbf7;
+}
+
+mat-nav-list mat-icon {
+    color: #57606f;
+    margin-right: 10%;
+}
+
+h3.mat-subheader {
+    color: #57606f;
+    background-color: #dfe4ea;
+    border-bottom-color: #ced6e0;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+
+.scroller {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    scrollbar-color: #70a1ff #dfe4ea;
+    scrollbar-width: thin;
+}

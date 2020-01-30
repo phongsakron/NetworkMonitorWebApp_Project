@@ -1,0 +1,48 @@
+<div class="pageHeader">
+
+    <mat-icon style="display:inline-block;">
+
+        dashboard</mat-icon>
+    <h3 style="display:inline-block">Dashboard</h3>
+    <div style="display:inline-block;width: 100%;text-align: end;">
+        <span *ngIf="state == true">
+            <mat-icon matListIcon class="statusup">fiber_manual_record</mat-icon>Monitor Service</span>
+        <span *ngIf="state == false">
+                    <mat-icon matListIcon class="statusdown">fiber_manual_record</mat-icon>Monitor Service</span>
+        <span *ngIf="state2 == true">
+            <mat-icon matListIcon class="statusup">fiber_manual_record</mat-icon>
+            Alert Service</span>
+        <span *ngIf="state2 == false">
+            <mat-icon matListIcon class="statusdown">fiber_manual_record</mat-icon>
+            Alert Service</span>
+    </div>
+
+    <mat-divider></mat-divider>
+</div>
+
+<div class="pageBody">
+    <div class="container" style="width: 100%;margin: 0;max-width: 100%;margin-top: 1%;">
+        <div class="row">
+            <div class="col-sm-4">
+                <app-donut-chart-all-device></app-donut-chart-all-device>
+            </div>
+            <div class="col-sm-4">
+                <app-horizon-chart-device-location></app-horizon-chart-device-location>
+            </div>
+            <div class="col-sm-4">
+                <app-line-chart-live></app-line-chart-live>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 100%;margin: 0;max-width: 100%;margin-top: 1%;">
+        <div class="row">
+            <div class="col-sm">
+                <app-live-down-device></app-live-down-device>
+            </div>
+            <div class="col-sm">
+                <!-- <app-notify-log></app-notify-log> -->
+            </div>
+
+        </div>
+    </div>
+</div>

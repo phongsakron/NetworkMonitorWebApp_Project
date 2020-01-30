@@ -1,0 +1,235 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "monitorweb": {
+            "projectType": "application",
+            "schematics": {},
+            "root": "",
+            "sourceRoot": "src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/monitorweb",
+                        "index": "src/index.html",
+                        "main": "src/main.ts",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "tsconfig.app.json",
+                        "aot": false,
+                        "assets": [
+                            "src/favicon.png",
+                            "src/assets"
+                        ],
+                        "styles": [
+                            "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+
+                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "node_modules/material-icons/css/material-icons.min.css",
+                            "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+                            "src/styles.css"
+                        ],
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.js",
+                            "node_modules/datatables.net/js/jquery.dataTables.js"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [{
+                                "replace": "src/environments/environment.ts",
+                                "with": "src/environments/environment.prod.ts"
+                            }],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [{
+                                "type": "initial",
+                                "maximumWarning": "2mb",
+                                "maximumError": "5mb"
+                            }]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "monitorweb:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "monitorweb:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "monitorweb:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "src/test.ts",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "tsconfig.spec.json",
+                        "karmaConfig": "karma.conf.js",
+                        "assets": [
+                            "src/favicon.png",
+                            "src/assets"
+                        ],
+                        "styles": [
+                            "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+                            "src/styles.css"
+                        ],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "tsconfig.app.json",
+                            "tsconfig.spec.json",
+                            "e2e/tsconfig.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "e2e/protractor.conf.js",
+                        "devServerTarget": "monitorweb:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "monitorweb:serve:production"
+                        }
+                    }
+                }
+            }
+        },
+        "lockin": {
+            "projectType": "application",
+            "schematics": {},
+            "root": "projects/lockin",
+            "sourceRoot": "projects/lockin/src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/lockin",
+                        "index": "projects/lockin/src/index.html",
+                        "main": "projects/lockin/src/main.ts",
+                        "polyfills": "projects/lockin/src/polyfills.ts",
+                        "tsConfig": "projects/lockin/tsconfig.app.json",
+                        "aot": false,
+                        "assets": [
+                            "projects/lockin/src/favicon.png",
+                            "projects/lockin/src/assets"
+                        ],
+                        "styles": [
+                            "projects/lockin/src/styles.css"
+                        ],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [{
+                                "replace": "projects/lockin/src/environments/environment.ts",
+                                "with": "projects/lockin/src/environments/environment.prod.ts"
+                            }],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [{
+                                "type": "initial",
+                                "maximumWarning": "2mb",
+                                "maximumError": "5mb"
+                            }]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "lockin:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "lockin:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "lockin:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/lockin/src/test.ts",
+                        "polyfills": "projects/lockin/src/polyfills.ts",
+                        "tsConfig": "projects/lockin/tsconfig.spec.json",
+                        "karmaConfig": "projects/lockin/karma.conf.js",
+                        "assets": [
+                            "projects/lockin/src/favicon.png",
+                            "projects/lockin/src/assets"
+                        ],
+                        "styles": [
+                            "projects/lockin/src/styles.css"
+                        ],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/lockin/tsconfig.app.json",
+                            "projects/lockin/tsconfig.spec.json",
+                            "projects/lockin/e2e/tsconfig.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/lockin/e2e/protractor.conf.js",
+                        "devServerTarget": "lockin:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "lockin:serve:production"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "defaultProject": "monitorweb"
+}

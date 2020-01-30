@@ -1,0 +1,203 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~material-icons/iconfont/material-icons.css';
+:root {
+    --highgreen: #2ed573;
+    --lowgreen: #7bed9f;
+    --highred: #ff6348;
+    --backgroundCommon: #dfe4ea;
+    --black: #2f3542;
+    /* dismiss */
+    --dismiss: #ff6b81;
+    --lowdismiss: #ff6348;
+    /* dismiss hover */
+    --dismisshover: #ff4757;
+    --lowdismisshover: #ff7f50;
+    /* confirm */
+    --confirm: #5352ed;
+    --lowconfirm: #70a1ff;
+    /* confirm hover */
+    --confirmhover: #3742fa;
+    --lowconfirmhover: #1e90ff;
+}
+
+html,
+body {
+    min-width: 1200px;
+}
+
+body {
+    margin: 0;
+    background-color: #dfe4ea;
+}
+
+html {
+    height: 100vh;
+    background-color: #dfe4ea;
+}
+
+mat-card.active {
+    border-top-color: var(--highgreen);
+    border-top-style: solid;
+    border-top-width: 3px;
+}
+
+mat-card.notactive {
+    border-top-color: var(--highred);
+    border-top-style: solid;
+    border-top-width: 3px;
+}
+
+.mat-button-toggle-label-content:hover {
+    background-color: #a4b0be;
+}
+
+mat-icon.statusup {
+    color: var(--highgreen);
+}
+
+mat-icon.statusdown {
+    color: var(--highred);
+}
+
+mat-icon {
+    color: var(--black);
+}
+
+div.pageHeader {
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 1%;
+}
+
+div.pageHeader mat-divider {
+    margin-top: 1%;
+}
+
+div.pageHeader mat-icon {
+    margin-right: 1%;
+}
+
+div.pageBody {
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+}
+
+div.pageBody * {
+    margin-top: 1%;
+}
+
+button.sidebar {
+    background-color: var(--confirm);
+    background-image: linear-gradient(to bottom right, var(--confirm), var(--lowconfirm));
+    color: white;
+}
+
+button.sidebar:hover {
+    background-color: var(--confirmhover);
+    background-image: linear-gradient(to bottom right, var(--confirmhover), var(--lowconfirmhover));
+    color: white;
+}
+
+button.confirm {
+    background-color: var(--confirm);
+    background-image: linear-gradient(to bottom right, var(--confirm), var(--lowconfirm));
+    color: white;
+}
+
+button.confirm mat-icon {
+    color: white;
+}
+
+button.confirm:hover {
+    background-color: var(--confirmhover);
+    background-image: linear-gradient(to bottom right, var(--confirmhover), var(--lowconfirmhover));
+    color: white;
+}
+
+button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-image: linear-gradient(to bottom right, #2f3542, #dfe4ea);
+    color: white;
+}
+
+button[disabled]:hover {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-image: linear-gradient(to bottom right, #2f3542, #dfe4ea);
+    color: white;
+}
+
+button.dismiss {
+    background-color: var(--dismiss);
+    background-image: linear-gradient(to bottom right, var(--dismiss), var(--lowdismiss));
+    color: white;
+}
+
+button.dismiss:hover {
+    background-color: var(--dismisshover);
+    background-image: linear-gradient(to bottom right, var(--dismisshover), var(--lowdismisshover));
+    color: white;
+}
+
+button.close {
+    color: white;
+}
+
+.modal-header {
+    background-color: #2f3542;
+    background-image: linear-gradient(to bottom right, var(--confirm), var(--lowconfirm));
+    color: white;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.rigth {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0;
+}
+
+.mat-slide-toggle-thumb {
+    width: 13px !important;
+    height: 13px !important;
+    transform: translate(40%, 45%);
+}
+
+.mat-slide-toggle-bar {
+    background-color: #000;
+    border-radius: 15px !important;
+    height: 20px !important;
+}
+
+.mat-slide-toggle-thumb-container {
+    top: -3px !important;
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: var(--confirm);
+    background-image: linear-gradient(to bottom right, var(--confirm), var(--lowconfirm));
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #ffffff;
+    border: #2f3542;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.mat-slide-toggle .mat-slide-toggle-thumb {
+    border: #2f3542;
+    border-width: 1px;
+    border-style: solid;
+}
+
+p.link {
+    color: var(--confirm);
+}
+
+p.danger {
+    color: var(--highred);
+}

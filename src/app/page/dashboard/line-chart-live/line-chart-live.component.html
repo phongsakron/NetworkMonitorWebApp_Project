@@ -1,0 +1,13 @@
+<mat-card class="active">
+    <mat-card-header>
+        <mat-card-title style="text-transform: capitalize;">Live Amout UP/DOWN</mat-card-title>
+
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <canvas id="liveChart" style="height:250px"></canvas>
+    <mat-button-toggle-group appearance="legacy">
+        <mat-button-toggle value="20" (click)="setRange(20)" style="color: black;">20</mat-button-toggle>
+        <mat-button-toggle value="50" (click)="setRange(50)" style="color: black;">50</mat-button-toggle>
+        <mat-button-toggle value="100" (click)="setRange(100)" style="color: black;">100</mat-button-toggle>
+    </mat-button-toggle-group>
+</mat-card>
