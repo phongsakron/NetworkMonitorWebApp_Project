@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  web:
+    container_name: 'monitor_web_frontend'
+    build:
+      context: .
+      dockerfile: monitor_web_frontend.dockerfile
+    image: monitor_web_frontend
+    ports:
+       - 7200:80
+    restart: always

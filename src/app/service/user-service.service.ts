@@ -33,8 +33,8 @@ export class UserServiceService {
     return this._http.delete(this.API_URL+"/userRemove/"+id)
   }
 
-  auth(user,pass){
-    return this._http.post(this.API_URL+"/auth/"+user+"/"+pass,this.options)
+  auth(jsonData){
+    return this._http.post(this.API_URL+"/auth",jsonData,this.options)
   }
   
   getUserById(id){

@@ -88,7 +88,11 @@ export class SingInComponent implements OnInit {
 
   onSingin(){
     let pass = sha256(this.passFormControl.value)
-    this.userS.auth(this.userFormControl.value,pass).subscribe(data=>{
+    let json = {
+      "username" : this.userFormControl.value,
+      "password" : pass
+    }
+    this.userS.auth(json).subscribe(data=>{
       
       if(data['auth'] == 'success'){
         this.loggS.loggedIn()
